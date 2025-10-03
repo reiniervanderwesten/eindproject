@@ -13,3 +13,9 @@ datasource db {
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
+
+model Review {
+  id      String @id @default(uuid())
+  rating  String
+  comment String
+}
