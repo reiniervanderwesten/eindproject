@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 
-app.use(Sentry.Handlers.errorHandler());
+//app.use(Sentry.Handlers.errorHandler());
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
