@@ -1,6 +1,7 @@
 import express from "express";
 import * as Sentry from "@sentry/node";
 import "dotenv/config";
+import hostsRouter from "./routes/hosts.js";
 
 const app = express();
 
@@ -23,6 +24,10 @@ Sentry.init({
 // Trace incoming requests
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
+
+app.use(express.json());
+
+app.use("/hosts", hostsRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
