@@ -3,6 +3,7 @@ import * as Sentry from "@sentry/node";
 import "dotenv/config";
 import hostsRouter from "./routes/hosts.js";
 import usersRouter from "./routes/users.js";
+import propertiesRouter from "./routes/properties.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(express.json());
 
 app.use("/hosts", hostsRouter);
 app.use("/users", usersRouter);
+app.use("/properties", propertiesRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
