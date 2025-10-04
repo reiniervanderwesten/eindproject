@@ -3,6 +3,7 @@ import reviewData from "../src/data/reviews.json" with { type: "json" };
 import userData from "../src/data/users.json" with {type: "json"};
 import propertyData from "../src/data/properties.json" with {type: "json"};
 import bookingData from "../src/data/bookings.json" with {type: "json"};
+import hostData from "../src/data/hosts.json" with {type: "json"};
 
 
 const prisma = new PrismaClient({ log: ["query", "info", "warn", "error"] });
@@ -12,6 +13,24 @@ async function main() {
   const {users}= userData;
   const {properties}= propertyData;
   const {bookings}=bookingData;
+  const {hosts}=hostData;
+
+  for (const host of hosts) {
+    await prisma.host.upsert({
+      where: { id: host.id },
+      update: {},
+      create: {
+        id: host.id,
+        username: host.username,
+        password: host.password,
+        name: host.name,
+        email: host.email,
+        phoneNumber: host.phoneNumber,
+        pictureUrl: host.pictureUrl,
+        aboutMe: host.aboutMe,
+      },
+    });
+  }
   
   for (const user of users) {
     await prisma.user.upsert({
@@ -34,8 +53,7 @@ async function main() {
       where: { id: property.id },
       update: {},
       create: {
-        id: property.id,
-        hostId: property.hostId,
+        id: property.id,        
         title: property.title,
         description: property.description,
         location: property.location,
@@ -44,6 +62,9 @@ async function main() {
         bathRoomCount: property.bathRoomCount,
         maxGuestCount: property.maxGuestCount,
         rating: property.rating,
+        hostId: {
+          connect: {id: property.hostId},
+        },
       },
     });
   }
