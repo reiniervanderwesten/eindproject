@@ -2,6 +2,7 @@ import express from "express";
 import * as Sentry from "@sentry/node";
 import "dotenv/config";
 import hostsRouter from "./routes/hosts.js";
+import usersRouter from "./routes/users.js";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(Sentry.Handlers.tracingHandler());
 app.use(express.json());
 
 app.use("/hosts", hostsRouter);
+app.use("/users", usersRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
