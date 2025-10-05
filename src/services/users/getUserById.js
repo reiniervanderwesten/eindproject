@@ -4,7 +4,9 @@ const getUserById = async (id) => {
   const prisma = new PrismaClient();
   const user = await prisma.user.findUnique({
     where: { id },
-  });
+  
+  omit: {password: true}},
+);
 
   return user;
 };
