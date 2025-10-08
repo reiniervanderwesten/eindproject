@@ -58,7 +58,7 @@ async function main() {
         description: property.description,
         location: property.location,
         pricePerNight: property.pricePerNight,
-        bedRoomCount: property.bedroomCount,
+        bedroomCount: property.bedroomCount,
         bathRoomCount: property.bathRoomCount,
         maxGuestCount: property.maxGuestCount,
         rating: property.rating,
