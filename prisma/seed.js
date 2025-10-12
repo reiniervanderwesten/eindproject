@@ -80,10 +80,10 @@ async function main() {
         numberOfGuests: booking.numberOfGuests,
         totalPrice: booking.totalPrice,
         bookingStatus: booking.bookingStatus,    
-        userId: {
+        gebruikerId: {
           connect: {id: booking.userId},
         },
-        propertyId:{
+        eigendomId:{
           connect: {id:booking.propertyId},
         },
         
@@ -100,10 +100,10 @@ async function main() {
         id:review.id,
         rating: review.rating,
         comment: review.comment,
-        userId:{
+        gebruikerId:{
           connect: {id: review.userId},
         },
-        propertyId:{
+        eigendomId:{
           connect: {id: review.propertyId},
         },
       },

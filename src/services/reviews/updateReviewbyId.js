@@ -10,12 +10,12 @@ const updateReviewById = async (id, updatedReview) => {
     where: { id },
     data: {
       ...rest,
-      userId: userId
+      gebruikerId: userId
         ? {
             connect: { id: userId },
           }
         : undefined,
-      propertyId: propertyId
+      eigendomId: propertyId
         ? {
             connect: {id: propertyId},
           }

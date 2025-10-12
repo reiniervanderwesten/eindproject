@@ -14,10 +14,10 @@ const createReview = async (
       rating,
       comment,     
                   
-      userId: {
+      gebruikerId: {
         connect: { id: userId },
       },
-      propertyId: {
+      eigendomId: {
         connect: {id: propertyId},
       },
     },

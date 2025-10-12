@@ -18,10 +18,10 @@ const createBooking = async (
       numberOfGuests,
       totalPrice,
       bookingStatus,      
-      userId: {
+      gebruikerId: {
         connect: { id: userId },
       },
-      propertyId: {
+      eigendomId: {
         connect: {id: propertyId},
       },
     },
