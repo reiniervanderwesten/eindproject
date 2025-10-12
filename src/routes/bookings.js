@@ -32,7 +32,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", auth, async (req, res, next) => {
   try {
     const {
       checkinDate,
@@ -60,7 +60,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", auth, async (req, res, next) => {
   try {
     const { id } = req.params;
     const {
@@ -98,7 +98,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", auth, async (req, res, next) => {
   try {
     const { id } = req.params;
     const booking = await deleteBookingById(id);
