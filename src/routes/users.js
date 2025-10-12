@@ -4,6 +4,7 @@ import getUserById from "../services/users/getUserById.js";
 import createUser from "../services/users/createUser.js";
 import updateUserById from "../services/users/updateUserById.js";
 import deleteUserById from "../services/users/deleteUserById.js";
+import auth from "../middleware/auth.js";
 
 const router = Router();
 
@@ -69,7 +70,7 @@ router.delete("/:id", async (req, res, next) => {
     if (user) {
       res.status(200).send({
         message: `User with id ${id} successfully deleted`,
-        user,
+        
       });
     } else {
       res.status(404).json({

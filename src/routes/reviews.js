@@ -4,6 +4,7 @@ import getReviewById from "../services/reviews/getReviewById.js";
 import createReview from "../services/reviews/createReview.js";
 import updateReviewById from "../services/reviews/updateReviewbyId.js";
 import deleteReviewById from "../services/reviews/deleteReviewById.js";
+import auth from "../middleware/auth.js";
 
 
 const router = Router();

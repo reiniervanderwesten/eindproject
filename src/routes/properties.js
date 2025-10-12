@@ -4,6 +4,7 @@ import getPropertyById from "../services/properties/getPropertyById.js";
 import createProperty from "../services/properties/createProperty.js";
 import updatePropertyById from "../services/properties/updatePropertyById.js";
 import deletePropertyById from "../services/properties/deletePropertyById.js";
+import auth from "../middleware/auth.js";
 
 const router = Router();
 
