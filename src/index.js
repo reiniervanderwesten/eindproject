@@ -7,6 +7,8 @@ import propertiesRouter from "./routes/properties.js";
 import bookingsRouter from "./routes/bookings.js";
 import reviewsRouter from "./routes/reviews.js";
 import loginRouter from "./routes/login.js";
+import log from "./middleware/logMiddleware.js";
+import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
 
@@ -31,6 +33,7 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
 app.use(express.json());
+app.use(log);
 
 app.use("/hosts", hostsRouter);
 app.use("/users", usersRouter);
@@ -45,6 +48,7 @@ app.get("/", (req, res) => {
 });
 
 //app.use(Sentry.Handlers.errorHandler());
+app.use(errorHandler);
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
