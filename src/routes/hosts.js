@@ -10,7 +10,8 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const hosts = await getHosts();
+    const { name, username } = req.query;    
+    const hosts = await getHosts(name, username);
     res.json(hosts);
   } catch (error) {
     next(error);
