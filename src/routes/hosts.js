@@ -57,7 +57,7 @@ router.post("/", auth, async (req, res, next) => {
     );
     res.status(201).json(newHost);
   } catch (error) {
-    next(error);
+    res.status(400).json("Bad request");
   }
 });
 
@@ -81,7 +81,7 @@ router.put("/:id", auth, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", auth, async (req, res, next) => {
+router.delete("/:id", auth,  async (req, res, next) => {
   try {
     const { id } = req.params;
     const host = await deleteHostById(id);

@@ -11,8 +11,8 @@ const router = Router();
 router.get("/", async (req, res, next) => {
   try {
     const {location, pricePerNight}=req.query;
-    const pricePerNacht=Number(pricePerNight)
-    const properties = await getProperties(location, pricePerNacht);
+    
+    const properties = await getProperties(location, pricePerNight);
     res.json(properties);
   } catch (error) {
     next(error);
@@ -60,7 +60,7 @@ router.post("/", auth, async (req, res, next) => {
     );
     res.status(201).json(newProperty);
   } catch (error) {
-    next(error);
+    res.status(400).json("Bad request");
   }
 });
 

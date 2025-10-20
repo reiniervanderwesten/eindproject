@@ -8,7 +8,7 @@ const getProperties = async (location, pricePerNight) => {
         contains: location,
       },
       pricePerNight: {
-        equals: pricePerNight,
+        contains: pricePerNight,
       },
     },
   });

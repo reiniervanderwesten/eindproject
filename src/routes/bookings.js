@@ -57,7 +57,7 @@ router.post("/", auth, async (req, res, next) => {
     );
     res.status(201).json(newBooking);
   } catch (error) {
-    next(error);
+    res.status(400).json("Bad request");
   }
 });
 

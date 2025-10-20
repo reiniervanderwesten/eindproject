@@ -52,7 +52,7 @@ router.post("/", auth, async (req, res, next) => {
     );
     res.status(201).json(newReview);
   } catch (error) {
-    next(error);
+    res.status(400).json("Bad request");
   }
 });
 

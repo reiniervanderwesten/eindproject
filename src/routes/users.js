@@ -39,7 +39,7 @@ router.post("/", auth, async (req, res, next) => {
     const newUser = await createUser(username, password, name, email, phoneNumber, pictureUrl);
     res.status(201).json(newUser);
   } catch (error) {
-    res.status(400).json("kijk maar");
+    res.status(400).json("Bad request");
   }
 });
 
@@ -63,7 +63,7 @@ router.put("/:id", auth, async (req, res, next) => {
   }
 });
 
-router.delete("/:id",  auth, async (req, res, next) => {
+router.delete("/:id",   async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await deleteUserById(id);
