@@ -5,6 +5,7 @@ import createBooking from "../services/bookings/createBooking.js";
 import updateBookingById from "../services/bookings/updateBookingById.js";
 import deleteBookingById from "../services/bookings/deleteBookingById.js";
 import auth from "../middleware/auth.js";
+import { Prisma } from "@prisma/client";
 
 const router = Router();
 
@@ -95,7 +96,14 @@ router.put("/:id", auth, async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError){
+          if (error.code==='P2025'){
+            res.status(404).json({
+            message: `Booking not found`,
+          });
+          }
+        }
+        else{next(error)}
   }
 });
 

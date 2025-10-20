@@ -5,6 +5,7 @@ import createReview from "../services/reviews/createReview.js";
 import updateReviewById from "../services/reviews/updateReviewbyId.js";
 import deleteReviewById from "../services/reviews/deleteReviewById.js";
 import auth from "../middleware/auth.js";
+import { Prisma } from "@prisma/client";
 
 
 const router = Router();
@@ -86,7 +87,15 @@ router.put("/:id", auth, async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError){
+      if (error.code==='P2025'){
+        res.status(404).json({
+        message: `Review not found`,
+      });
+      }
+    }
+    else{next(error)}
+
   }
 });
 

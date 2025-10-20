@@ -5,6 +5,7 @@ import createProperty from "../services/properties/createProperty.js";
 import updatePropertyById from "../services/properties/updatePropertyById.js";
 import deletePropertyById from "../services/properties/deletePropertyById.js";
 import auth from "../middleware/auth.js";
+import { Prisma } from "@prisma/client";
 
 const router = Router();
 
@@ -100,7 +101,14 @@ router.put("/:id", auth, async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError){
+              if (error.code==='P2025'){
+                res.status(404).json({
+                message: `Property not found`,
+              });
+              }
+            }
+            else{next(error)}
   }
 });
 
