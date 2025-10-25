@@ -5,6 +5,7 @@ import createHost from "../services/hosts/createHost.js";
 import updateHostById from "../services/hosts/updateHostById.js";
 import deleteHostById from "../services/hosts/deleteHostById.js";
 import auth from "../middleware/auth.js";
+import { Prisma } from "@prisma/client";
 
 const router = Router();
 
@@ -57,7 +58,10 @@ router.post("/", auth, async (req, res, next) => {
     );
     res.status(201).json(newHost);
   } catch (error) {
-    res.status(400).json("Bad request");
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code==='P2002'){
+                      res.status(400).json("already exists")
+                    }
+                    else{res.status(400).json("Bad request");}
   }
 });
 
