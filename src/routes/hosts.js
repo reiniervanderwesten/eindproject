@@ -59,7 +59,7 @@ router.post("/", auth, async (req, res, next) => {
     res.status(201).json(newHost);
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code==='P2002'){
-                      res.status(400).json("already exists")
+                      res.status(400).json("username already exists")
                     }
                     else{res.status(400).json("Bad request");}
   }
