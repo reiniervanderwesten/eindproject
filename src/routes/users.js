@@ -5,6 +5,7 @@ import createUser from "../services/users/createUser.js";
 import updateUserById from "../services/users/updateUserById.js";
 import deleteUserById from "../services/users/deleteUserById.js";
 import auth from "../middleware/auth.js";
+import { Prisma } from "@prisma/client";
 
 const router = Router();
 
@@ -33,13 +34,18 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", auth, async (req, res, next) => {
+router.post("/",  auth, async (req, res, next) => {
   try {
     const { username, password, name, email, phoneNumber, pictureUrl } = req.body;
     const newUser = await createUser(username, password, name, email, phoneNumber, pictureUrl);
     res.status(201).json(newUser);
   } catch (error) {
-    res.status(400).json("Bad request");
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code==='P2002'){
+                  res.status(400).json("already exists")
+                }
+                else{res.status(400).json("Bad request");}
+                
   }
 });
 
